@@ -1,11 +1,15 @@
+# 工作流名称:check(校验)
+# 作用:在有新的拉取请求时,对 streams/ 目录中变更的播放列表执行语法检查(lint)和数据校验(validate),
+#      发现错误则阻断合并。详见 docs/workflows.md 与 docs/scripts.md。
 name: check
 on:
-  workflow_dispatch:
-  pull_request:
+  workflow_dispatch:        # 允许在 GitHub 页面上手动触发
+  pull_request:             # 拉取请求打开、更新(新提交推送)、重新打开时自动触发
     types: [opened, synchronize, reopened]
 permissions:
-  contents: read
+  contents: read            # 最小权限:只读仓库内容
 concurrency:
+  # 同一个 PR(或同一分支)的多次触发只保留最新一次运行,旧的自动取消,节省 CI 资源
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 jobs:
@@ -13,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      # 第一步:对比 master 分支,找出 streams/ 目录下所有被新增/修改的文件
       - name: Get list of changed files
         id: files
         run: |
@@ -24,14 +29,16 @@ jobs:
           fi
           echo "all_changed_files=$ALL_CHANGED_FILES" >> "$GITHUB_OUTPUT"
           echo "any_changed=$ANY_CHANGED" >> "$GITHUB_OUTPUT"
+      # 只有 streams/ 下确实有文件变更时,后续步骤才会执行
       - uses: actions/setup-node@v6
         if: steps.files.outputs.any_changed == 'true'
         with:
           node-version: 22
           cache: 'npm'
-      - name: Install dependencies
+      - name: Install dependencies # 安装 npm 依赖
         if: steps.files.outputs.any_changed == 'true'
         run: npm install
+      # 第二步:对变更的播放列表依次运行 lint(语法检查)与 validate(ID 与链接校验)
       - name: Validate changed files
         if: steps.files.outputs.any_changed == 'true'
         run: |
