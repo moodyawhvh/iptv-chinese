@@ -1,13 +1,15 @@
-# Contributor Code of Conduct
+> 🌐 本文档由 [iptv-org/iptv](https://github.com/iptv-org/iptv) 翻译,英文原版见原项目。
 
-As contributors and maintainers of this project, we pledge to respect all people who contribute through reporting issues, posting feature requests, updating documentation, submitting pull requests or patches, and other activities.
+# 贡献者行为准则
 
-We are committed to making participation in this project a harassment-free experience for everyone, regardless of level of experience, gender, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, or religion.
+作为本项目的贡献者和维护者,我们承诺尊重每一位通过提交 issue、发布功能请求、更新文档、提交拉取请求或补丁以及其他方式为本项目做出贡献的人。
 
-Examples of unacceptable behavior by participants include the use of sexual language or imagery, derogatory comments or personal attacks, trolling, public or private harassment, insults, or other unprofessional conduct.
+我们致力于让每一位参与者在本项目中免受骚扰,无论其经验水平、性别、性别认同与表达、性取向、残障状况、个人形象、身材、种族、民族、年龄或宗教信仰如何。
 
-Project maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct. Project maintainers who do not follow the Code of Conduct may be removed from the project team.
+参与者不可接受的行为包括:使用带有性意味的言辞或图像、发表贬低性评论或进行人身攻击、恶意挑衅、公开或私下骚扰、侮辱,以及其他不专业的行为。
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by opening an issue or contacting one or more of the project maintainers.
+项目维护者有权且有责任移除、编辑或拒绝不符合本行为准则的评论、提交、代码、Wiki 编辑、issue 及其他贡献。不遵守本行为准则的项目维护者可能会被移出项目团队。
 
-This Code of Conduct is adapted from the [Contributor Covenant](http:contributor-covenant.org), version 1.0.0, available at https://www.contributor-covenant.org/version/1/0/0/code-of-conduct.html
+如遇辱骂、骚扰或其他不可接受的行为,可以通过提交 issue 或联系一位或多位项目维护者进行举报。
+
+本行为准则改编自 [Contributor Covenant](http:contributor-covenant.org) 1.0.0 版,原文见 https://www.contributor-covenant.org/version/1/0/0/code-of-conduct.html

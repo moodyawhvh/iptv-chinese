@@ -1,80 +1,82 @@
-# Contributing Guide
+> 🌐 本文档由 [iptv-org/iptv](https://github.com/iptv-org/iptv) 翻译,英文原版见原项目。
 
-- [Introduction](#introduction)
-- [How to?](#how-to)
-- [Project Structure](#project-structure)
+# 贡献指南
 
-## Introduction
+- [简介](#introduction)
+- [怎么做?](#how-to)
+- [项目结构](#project-structure)
 
-**iptv-org** is more than just a repository for sharing links to live streams. After years of commitment and moderation practices, it has evolved into a knowledge base for [channels](https://github.com/iptv-org/database), [streams](https://github.com/iptv-org/iptv), and [program guides](https://github.com/iptv-org/epg). To keep all this data organized, we must follow strict structural requirements and set certain standards for participants.
+## 简介 <a id="introduction"></a>
 
-## How to?
+**iptv-org** 不只是一个分享直播流链接的仓库。经过多年的投入与内容治理实践,它已经发展成为一个涵盖[频道](https://github.com/iptv-org/database)、[直播流](https://github.com/iptv-org/iptv)和[节目指南](https://github.com/iptv-org/epg)的知识库。为了让这些数据保持井然有序,我们必须遵循严格的结构要求,并为参与者设定一定的规范。
 
-### How to add a new stream link to a playlist?
+## 怎么做? <a id="how-to"></a>
 
-You have several options:
+### 如何向播放列表添加新的直播流链接?
 
-1. Create a new request using this [form](https://github.com/iptv-org/iptv/issues/new?assignees=&labels=streams:add&projects=&template=1_streams_add.yml&title=Add%3A+) and, if approved, the link will automatically be added to the playlist on the next update.
-2. Add the link to the playlist directly using a [pull request](https://github.com/iptv-org/iptv/pulls). See [Playlists](./docs/playlists.md).
+你有以下几种选择:
 
-Regardless of which option you choose, please perform the following checks before posting your request:
+1. 使用这个[表单](https://github.com/iptv-org/iptv/issues/new?assignees=&labels=streams:add&projects=&template=1_streams_add.yml&title=Add%3A+)创建新的请求,如果获得批准,该链接会在下次更新时自动加入播放列表。
+2. 通过[拉取请求](https://github.com/iptv-org/iptv/pulls)直接把链接添加到播放列表。参见[播放列表](./docs/playlists.md)。
 
-- Make sure you are using a valid [stream ID](./docs/stream-id.md).
-- Make sure the channel is not on our blocklist. The easiest way to do this is through [iptv-org.github.io](https://iptv-org.github.io/).
-- Make sure the link is not already in the playlist by [searching](https://github.com/search?q=repo%3Aiptv-org%2Fiptv+http%3A%2F%2Fexample.com&type=code) the repository.
-- Make sure the link you want to add is stable and works properly. See [Stream Testing](./docs/stream-testing.md).
-- Make sure the link is not [geo-blocked](./docs/geo-blocking.md). If it is, do not forget to mention this in your request.
-- Make sure the link does not lead to a [Xtream Codes](./docs/xtream-codes.md) server. [Why don't you accept links to Xtream Codes servers?](./FAQ.md#why-dont-you-accept-links-to-xtream-codes-servers).
-- Make sure the link is not [tokenized](./docs/tokenized-links.md).
-- Make sure the link leads directly to the broadcast without unnecessary redirects.
+无论选择哪种方式,提交请求之前请先完成以下检查:
 
-If the broadcast only works in certain countries or is periodically interrupted, please indicate this in your request.
+- 确保你使用的是有效的[流 ID](./docs/stream-id.md)。
+- 确保该频道不在我们的黑名单中。最简单的确认方式是通过 [iptv-org.github.io](https://iptv-org.github.io/)。
+- 通过[搜索](https://github.com/search?q=repo%3Aiptv-org%2Fiptv+http%3A%2F%2Fexample.com&type=code)仓库,确保该链接尚未存在于播放列表中。
+- 确保你要添加的链接稳定且能正常工作。参见[直播流测试](./docs/stream-testing.md)。
+- 确保该链接没有被[地域封锁](./docs/geo-blocking.md)。如果有,请在请求中注明。
+- 确保该链接不是指向 [Xtream Codes](./docs/xtream-codes.md) 服务器。[为什么不接受 Xtream Codes 服务器的链接?](./FAQ.md#why-dont-you-accept-links-to-xtream-codes-servers)
+- 确保该链接不是[令牌化链接](./docs/tokenized-links.md)。
+- 确保链接直接指向广播源,没有多余的重定向。
 
-**IMPORTANT:** A request without a valid stream ID or a working stream link will be closed immediately.
+如果广播只在特定国家可用,或者会周期性中断,请在请求中说明。
 
-### How to fix the stream description?
+**重要:** 缺少有效流 ID 或无法工作的直播流链接的请求将被立即关闭。
 
-Most of the stream description (channel name, feed name, categories, languages, broadcast area, logo) is loaded from [iptv-org/database](https://github.com/iptv-org/database) using the stream ID.
+### 如何修正直播流的描述信息?
 
-So there are usually only two reasons for an incorrect description:
+直播流描述的大部分内容(频道名称、信号源名称、分类、语言、播出区域、Logo)都是通过流 ID 从 [iptv-org/database](https://github.com/iptv-org/database) 加载的。
 
-- **The stream has an incorrect ID:** In that case, all you need is to update the stream ID in the playlist using this [form](https://github.com/iptv-org/iptv/issues/new?assignees=&labels=streams%3Aedit&projects=&template=2_streams_edit.yml&title=Edit%3A+). A full list of all supported channels and their corresponding IDs can be found on [iptv-org.github.io](https://iptv-org.github.io/).
-- **Our database contains incorrect channel information:** You can verify this on [iptv-org.github.io](https://iptv-org.github.io/). If this is the case, please refer to: [How to edit a database entry?](https://github.com/iptv-org/database/blob/master/CONTRIBUTING.md#how-to-edit-a-database-entry).
+因此,描述信息出错通常只有两种原因:
 
-Once the changes are approved, the stream description will automatically update across all repositories.
+- **直播流的 ID 不正确:** 这种情况下,你只需通过这个[表单](https://github.com/iptv-org/iptv/issues/new?assignees=&labels=streams%3Aedit&projects=&template=2_streams_edit.yml&title=Edit%3A+)更新播放列表中的流 ID 即可。所有受支持频道及其对应 ID 的完整列表可以在 [iptv-org.github.io](https://iptv-org.github.io/) 上查看。
+- **我们数据库中的频道信息有误:** 你可以在 [iptv-org.github.io](https://iptv-org.github.io/) 上核实。如果确实如此,请参考:[如何编辑数据库条目?](https://github.com/iptv-org/database/blob/master/CONTRIBUTING.md#how-to-edit-a-database-entry)。
 
-### How to report a broken stream?
+变更获得批准后,直播流描述会在所有仓库中自动更新。
 
-Fill out this [form](https://github.com/iptv-org/iptv/issues/new?assignees=&labels=streams:remove&projects=&template=3_streams_report.yml&title=Broken%3A+) and as soon as a working replacement appears, we will add it to the playlist or at least remove the non-working one.
+### 如何报告失效的直播流?
 
-The only thing before publishing your report is to make sure that:
+填写这个[表单](https://github.com/iptv-org/iptv/issues/new?assignees=&labels=streams:remove&projects=&template=3_streams_report.yml&title=Broken%3A+),一旦出现可用的替代源,我们会把它加入播放列表,或者至少先移除失效的链接。
 
-- The link is still in our playlists. You can verify this by [searching](https://github.com/search?q=repo%3Aiptv-org%2Fiptv+http%3A%2F%2Fexample.com&type=code) the repository.
-- The link is completely broken and is not just [geo-blocked](https://en.wikipedia.org/wiki/Geo-blocking). See [Stream Testing](./docs/stream-testing.md).
+发布报告之前,唯一要确认的是:
 
-**IMPORTANT:** An issue without a valid stream link will be closed immediately.
+- 该链接仍在我们的播放列表中。你可以通过[搜索](https://github.com/search?q=repo%3Aiptv-org%2Fiptv+http%3A%2F%2Fexample.com&type=code)仓库来核实。
+- 该链接是彻底失效,而不仅仅是被[地域封锁](https://en.wikipedia.org/wiki/Geo-blocking)。参见[直播流测试](./docs/stream-testing.md)。
 
-### How to remove my channel from the playlist?
+**重要:** 缺少有效直播流链接的 issue 将被立即关闭。
 
-To request the removal of a channel link from the repository, please fill out this [form](https://github.com/iptv-org/iptv/issues/new?assignees=&labels=removal+request&projects=&template=6_copyright-claim.yml&title=Remove%3A+) and wait for the request to be reviewed (this usually takes less than 1 business day). If approved, links to the channel will be immediately removed from the repository.
+### 如何将我的频道从播放列表中移除?
 
-The channel will also be added to our [blocklist](https://github.com/iptv-org/database/blob/master/data/blocklist.csv) to prevent it from reappearing in our playlists in the future.
+若要求从仓库中移除频道链接,请填写这个[表单](https://github.com/iptv-org/iptv/issues/new?assignees=&labels=removal+request&projects=&template=6_copyright-claim.yml&title=Remove%3A+)并等待请求审核(通常不到 1 个工作日)。获得批准后,该频道的链接会立即从仓库中移除。
 
-**IMPORTANT:** We only accept removal requests from channel owners and their official representatives. All other requests will be closed immediately.
+同时,该频道会被加入我们的[黑名单](https://github.com/iptv-org/database/blob/master/data/blocklist.csv),以防止它日后再次出现在我们的播放列表中。
 
-## Project Structure
+**重要:** 我们只接受频道所有者及其官方代表提交的移除请求,其他所有请求都将被立即关闭。
+
+## 项目结构 <a id="project-structure"></a>
 
 - `.github/`
-  - `DISCUSSION_TEMPLATE/`: Contains discussion templates for the repository.
-  - `ISSUE_TEMPLATE/`: Contains issue templates for the repository.
-  - `workflows/`: Contains [GitHub Actions](https://docs.github.com/en/actions/quickstart) workflows. See [Workflows](./docs/workflows.md).
-  - `CODE_OF_CONDUCT.md`: Rules you shouldn't break if you don't want to get banned.
+  - `DISCUSSION_TEMPLATE/`:仓库的讨论模板。
+  - `ISSUE_TEMPLATE/`:仓库的 issue 模板。
+  - `workflows/`:[GitHub Actions](https://docs.github.com/en/actions/quickstart) 工作流。参见[工作流](./docs/workflows.md)。
+  - `CODE_OF_CONDUCT.md`:行为准则——不想被封禁就别违反。
 - `.readme/`
-  - `preview.png`: Image displayed in the `README.md`.
-  - `template.md`: Template configuration for `PLAYLISTS.md`.
-- `scripts/`: Contains internal utility scripts used in the repository. See [Scripts](./docs/scripts.md).
-- `streams/`: Contains internal playlists with all streams. See [Playlist Structure](./docs/playlist-structure.md).
-- `tests/`: Contains test suites to validate project scripts.
-- `CONTRIBUTING.md`: The file you are currently reading.
-- `PLAYLISTS.md`: Automatically updated list of available playlists.
-- `README.md`: Project description and documentation overview.
+  - `preview.png`:`README.md` 中展示的图片。
+  - `template.md`:`PLAYLISTS.md` 的模板配置。
+- `scripts/`:仓库内部使用的工具脚本。参见[脚本](./docs/scripts.md)。
+- `streams/`:包含所有直播流的内部播放列表。参见[播放列表结构](./docs/playlist-structure.md)。
+- `tests/`:用于验证项目脚本的测试套件。
+- `CONTRIBUTING.md`:你正在阅读的这个文件。
+- `PLAYLISTS.md`:自动更新的可用播放列表清单。
+- `README.md`:项目说明与文档总览。
