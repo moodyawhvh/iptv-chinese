@@ -1,24 +1,26 @@
-# Stream Testing
+> 🌐 本文档由 [iptv-org/iptv](https://github.com/iptv-org/iptv) 翻译,英文原版见原项目。
 
-To make sure a stream link is working properly, just follow these simple steps:
+# 直播流测试
 
-1. Open it in a media player that supports [HLS](https://en.wikipedia.org/wiki/HTTP_Live_Streaming) or [DASH](https://en.wikipedia.org/wiki/Dynamic_Adaptive_Streaming_over_HTTP) streams. In the examples below, we will use [VLC media player](https://www.videolan.org/vlc/index.html).
-2. Watch the broadcast for at least a minute. Make sure playback is stable and doesn't stop abruptly (some test streams cut off after 15–30 seconds).
-3. Try restarting the stream. Make sure it isn't looping on a repeating segment and remains available.
+要确认一条直播流链接能否正常观看,只需按下面几个简单步骤操作:
 
-If the stream isn't playing, try opening the player's error log. You can usually find the exact cause there. In VLC, it is located under `Tools -> Messages`.
+1. 用一个支持 [HLS](https://en.wikipedia.org/wiki/HTTP_Live_Streaming) 或 [DASH](https://en.wikipedia.org/wiki/Dynamic_Adaptive_Streaming_over_HTTP) 流的媒体播放器打开它。下文的示例中我们使用 [VLC media player](https://www.videolan.org/vlc/index.html)。
+2. 观看广播至少一分钟,确认播放稳定、不会突然中断(有些测试流会在 15–30 秒后截断)。
+3. 尝试重新打开该直播流,确认它不是在循环播放同一段内容,并且仍然可用。
 
-If the stream won't play in your media player but works fine in a web browser, the issue is likely missing [HTTP User-Agent](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent) and/or [HTTP Referrer](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer) headers.
+如果直播流无法播放,试着打开播放器的错误日志,通常能在那里找到确切原因。在 VLC 中,它位于 `工具 -> 消息`(Tools -> Messages)。
 
-In this case, open the stream in your browser. Press `F12`, go to the **Network** tab, and filter the requests for `m3u` or `mpd`:
+如果直播流在你的媒体播放器里放不出来,但在网页浏览器中却一切正常,问题很可能出在缺少 [HTTP User-Agent](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent) 和/或 [HTTP Referrer](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer) 请求头。
+
+这时,在浏览器中打开该直播流,按 `F12`,切换到 **Network**(网络)标签页,然后过滤 `m3u` 或 `mpd` 请求:
 
 <img width="338" height="256" alt="image" src="https://github.com/user-attachments/assets/2eec24df-21a4-4a77-8a96-4f967baf2548" />
 
-Then switch to the **Headers** tab, scroll down, and copy the `User-Agent` and `Referer` values:
+接着切换到 **Headers**(标头)标签页,往下滚动,复制 `User-Agent` 和 `Referer` 的值:
 
 <img width="660" height="425" alt="image" src="https://github.com/user-attachments/assets/6e0c4453-3e56-4ad3-86a7-c9430c33c188" />
 
-Next, open any text editor and paste the link along with the parameters you found, formatted like this:
+然后打开任意文本编辑器,把链接和刚找到的参数按如下格式粘贴进去:
 
 ```m3u
 #EXTM3U
@@ -28,6 +30,6 @@ Next, open any text editor and paste the link along with the parameters you foun
 https://example.com/playlist.m3u8
 ```
 
-Save the file with `.m3u` extension, then open it in your media player. In most cases, it should work immediately.
+把文件保存为 `.m3u` 扩展名,再用媒体播放器打开它。大多数情况下,它应该立刻就能播放。
 
-To test links that are already in the repository, you can simply run the [playlist:test](./scripts.md#playlisttest) script.
+要测试仓库中已有的链接,直接运行 [playlist:test](./scripts.md#playlisttest) 脚本即可。

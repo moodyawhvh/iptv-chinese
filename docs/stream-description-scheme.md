@@ -1,28 +1,30 @@
-# Stream Description Scheme
+> 🌐 本文档由 [iptv-org/iptv](https://github.com/iptv-org/iptv) 翻译,英文原版见原项目。
 
-For a stream to be approved, its description must follow this template:
+# 直播流描述方案
+
+一条直播流要想通过审核,其描述必须遵循以下模板:
 
 ```m3u
 #EXTINF:-1 tvg-id="STREAM_ID",STREAM_TITLE (QUALITY) [LABEL]
 STREAM_URL
 ```
 
-| Attribute      | Description                                                                                                                                                                     | Required | Valid values                                 |
+| 属性           | 说明                                                                                                                                                                            | 是否必填 | 有效值                                       |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------- |
-| `STREAM_ID`    | Stream ID consisting of a channel ID and a feed ID. A full list of supported channels with corresponding IDs can be found on [iptv-org.github.io](https://iptv-org.github.io/). | Optional | `<channel_id>` or `<channel_id>@<feed_id>`   |
-| `STREAM_TITLE` | Stream title consisting of a channel name and a feed name. May contain any characters except `,`, `[`, or `]`.                                                                  | Required | -                                            |
-| `QUALITY`      | Maximum stream quality.                                                                                                                                                         | Optional | `2160p`, `1080p`, `720p`, `480p`, `360p` etc |
-| `LABEL`        | Specified in cases where the broadcast for some reason may not be available to some users.                                                                                      | Optional | `Geo-blocked` or `Not 24/7`                  |
-| `STREAM_URL`   | Stream URL. The following protocols are supported: `HTTPS`, `HTTP`, `MMS`, `MMSH`, `RTSP`, `RTMP`, `SRT`, `RTP`, `UDP`.                                                         | Required | -                                            |
+| `STREAM_ID`    | 流 ID,由频道 ID 和信号源(feed)ID 组成。所有受支持频道及其对应 ID 的完整列表可在 [iptv-org.github.io](https://iptv-org.github.io/) 查阅。                                        | 可选     | `<channel_id>` 或 `<channel_id>@<feed_id>`   |
+| `STREAM_TITLE` | 流标题,由频道名称和信号源名称组成。可包含除 `,`、`[`、`]` 之外的任意字符。                                                                                                       | 必填     | -                                            |
+| `QUALITY`      | 直播流最高画质。                                                                                                                                                                 | 可选     | `2160p`、`1080p`、`720p`、`480p`、`360p` 等   |
+| `LABEL`        | 当广播因某些原因可能对部分用户不可用时标注。                                                                                                                                     | 可选     | `Geo-blocked` 或 `Not 24/7`                   |
+| `STREAM_URL`   | 直播流 URL。支持以下协议:`HTTPS`、`HTTP`、`MMS`、`MMSH`、`RTSP`、`RTMP`、`SRT`、`RTP`、`UDP`。                                                                                   | 必填     | -                                            |
 
-Example:
+示例:
 
 ```m3u
 #EXTINF:-1 tvg-id="ExampleTV.us@East",Example TV East (720p) [Geo-blocked]
 https://example.com/playlist.m3u8
 ```
 
-Also, if necessary, you can specify a custom [HTTP User-Agent](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent) and [HTTP Referrer](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer) through the `#EXTVLCOPT` directive:
+此外,如有需要,还可以通过 `#EXTVLCOPT` 指令指定自定义的 [HTTP User-Agent](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent) 和 [HTTP Referrer](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer):
 
 ```m3u
 #EXTINF:-1 tvg-id="ExampleTV.us",Example TV
