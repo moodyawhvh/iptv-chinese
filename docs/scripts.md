@@ -1,8 +1,10 @@
-# Scripts
+> 🌐 本文档由 [iptv-org/iptv](https://github.com/iptv-org/iptv) 翻译,英文原版见原项目。
 
-The repository contains a few scripts created to automate routine processes and make it a bit easier to maintain.
+# 脚本
 
-For the scripts to work, you must have [Node.js](https://nodejs.org/en) installed on your computer.
+仓库内置了一些脚本,用于自动化日常流程,让维护工作轻松一点。
+
+要运行这些脚本,你的电脑上必须安装 [Node.js](https://nodejs.org/en)。
 
 - [act:check](#actcheck)
 - [act:format](#actformat)
@@ -26,7 +28,7 @@ For the scripts to work, you must have [Node.js](https://nodejs.org/en) installe
 
 ## act:check
 
-Runs the [check](./workflows.md#check) workflow locally. Depends on [nektos/gh-act](https://github.com/nektos/gh-act).
+在本地运行 [check](./workflows.md#check) 工作流。依赖 [nektos/gh-act](https://github.com/nektos/gh-act)。
 
 ```sh
 npm run act:check
@@ -34,7 +36,7 @@ npm run act:check
 
 ## act:format
 
-Runs the [format](./workflows.md#format) workflow locally. Depends on [nektos/gh-act](https://github.com/nektos/gh-act).
+在本地运行 [format](./workflows.md#format) 工作流。依赖 [nektos/gh-act](https://github.com/nektos/gh-act)。
 
 ```sh
 npm run act:format
@@ -42,7 +44,7 @@ npm run act:format
 
 ## act:update
 
-Runs the [update](./workflows.md#update) workflow locally. Depends on [nektos/gh-act](https://github.com/nektos/gh-act).
+在本地运行 [update](./workflows.md#update) 工作流。依赖 [nektos/gh-act](https://github.com/nektos/gh-act)。
 
 ```sh
 npm run act:update
@@ -50,7 +52,7 @@ npm run act:update
 
 ## act:validate_issue
 
-Runs the [validate_issue](./workflows.md#validate_issue) workflow locally. Depends on [nektos/gh-act](https://github.com/nektos/gh-act).
+在本地运行 [validate_issue](./workflows.md#validate_issue) 工作流。依赖 [nektos/gh-act](https://github.com/nektos/gh-act)。
 
 ```sh
 npm run act:validate_issue -- -e .github/mocks/events/issue_opened.json
@@ -58,7 +60,7 @@ npm run act:validate_issue -- -e .github/mocks/events/issue_opened.json
 
 ## act:validate_label
 
-Runs the [validate_label](./workflows.md#validate_label) workflow locally. Depends on [nektos/gh-act](https://github.com/nektos/gh-act).
+在本地运行 [validate_label](./workflows.md#validate_label) 工作流。依赖 [nektos/gh-act](https://github.com/nektos/gh-act)。
 
 ```sh
 npm run act:validate_label -- -e .github/mocks/events/issue_approved.json --actor Bob
@@ -66,7 +68,7 @@ npm run act:validate_label -- -e .github/mocks/events/issue_approved.json --acto
 
 ## api:load
 
-Downloads the latest channel and stream data from the [iptv-org/api](https://github.com/iptv-org/api) repository.
+从 [iptv-org/api](https://github.com/iptv-org/api) 仓库下载最新的频道和直播流数据。
 
 ```sh
 npm run api:load
@@ -74,7 +76,7 @@ npm run api:load
 
 ## issue:validate
 
-Checks the request for errors and, if any are found, saves a list of them to the file `temp/logs/errors.txt`
+检查请求是否存在错误,如果发现问题,会把错误清单保存到文件 `temp/logs/errors.txt`
 
 ```sh
 npm run issue:validate --body="### Stream URL..." --labels="streams:add"
@@ -82,19 +84,19 @@ npm run issue:validate --body="### Stream URL..." --labels="streams:add"
 
 ## playlist:format
 
-Formats internal playlists. The process includes [URL normalization](https://en.wikipedia.org/wiki/URI_normalization), duplicate removal, removing invalid IDs, and sorting links by channel name, quality, and label.
+整理内部播放列表的格式,包括 [URL 规范化](https://en.wikipedia.org/wiki/URI_normalization)、去重、移除无效 ID,以及按频道名称、画质和标签排序。
 
 ```sh
-# format all playlists in the streams/ directory
+# 整理 streams/ 目录下的所有播放列表
 npm run playlist:format
 
-# format a specific playlist
+# 整理指定的播放列表
 npm run playlist:format path/to/playlist.m3u
 ```
 
 ## playlist:update
 
-Triggers an update of internal playlists. The process involves processing approved requests from issues.
+触发内部播放列表的更新,处理流程包括处理 issue 中已批准的请求。
 
 ```sh
 npm run playlist:update
@@ -102,7 +104,7 @@ npm run playlist:update
 
 ## playlist:generate
 
-Generates all public playlists.
+生成所有公开播放列表。
 
 ```sh
 npm run playlist:generate
@@ -110,41 +112,41 @@ npm run playlist:generate
 
 ## playlist:validate
 
-Checks IDs and links in internal playlists for errors.
+检查内部播放列表中的 ID 和链接是否有错误。
 
 ```sh
-# check all playlists in the streams/ directory
+# 检查 streams/ 目录下的所有播放列表
 npm run playlist:validate
 
-# check a specific playlist
+# 检查指定的播放列表
 npm run playlist:validate path/to/playlist.m3u
 ```
 
 ## playlist:lint
 
-Checks internal playlists for syntax errors.
+检查内部播放列表是否存在语法错误。
 
 ```sh
-# check all playlists in the streams/ directory
+# 检查 streams/ 目录下的所有播放列表
 npm run playlist:lint
 
-# check a specific playlist
+# 检查指定的播放列表
 npm run playlist:lint path/to/playlist.m3u
 ```
 
 ## playlist:test
 
-Tests links in internal playlists.
+测试内部播放列表中的链接。
 
 ```sh
-# check all playlists in the streams/ directory
+# 检查 streams/ 目录下的所有播放列表
 npm run playlist:test
 
-# check a specific playlist
+# 检查指定的播放列表
 npm run playlist:test path/to/playlist.m3u
 ```
 
-This command will run an automatic check of all links in the playlist and display their status:
+该命令会自动检测播放列表中所有链接的状态并逐一显示:
 
 ```sh
 npm run playlist:test streams/fr.m3u
@@ -163,7 +165,7 @@ streams/fr.m3u
 │  7  │ AlpedHuezTV.fr            │ https://edge.vedge.infomaniak.com/livecast/ik:adhtv/chunklist.m3u8                                   │ Not 24/7       │ HTTP_NOT_FOUND            │
 ```
 
-Also, if you add the `--fix` option to the command, the script will automatically remove all broken streams it finds from your local copy of the playlists:
+另外,如果在命令后加上 `--fix` 选项,脚本会自动把它检测到的所有失效直播流从你本地的播放列表副本中移除:
 
 ```sh
 npm run playlist:test streams/fr.m3u -- --fix
@@ -171,7 +173,7 @@ npm run playlist:test streams/fr.m3u -- --fix
 
 ## playlist:edit
 
-A utility for quick streams mapping.
+用于快速映射直播流的小工具。
 
 ```sh
 npm run playlist:edit path/to/playlist.m3u
@@ -179,7 +181,7 @@ npm run playlist:edit path/to/playlist.m3u
 
 ## playlist:export
 
-Creates a JSON file with all streams for the [iptv-org/api](https://github.com/iptv-org/api) repository.
+为 [iptv-org/api](https://github.com/iptv-org/api) 仓库生成包含所有直播流的 JSON 文件。
 
 ```sh
 npm run playlist:export
@@ -187,7 +189,7 @@ npm run playlist:export
 
 ## readme:update
 
-Updates the configuration and list of available streams in [PLAYLISTS.md](PLAYLISTS.md).
+更新 [PLAYLISTS.md](PLAYLISTS.md) 中的配置和可用播放列表清单。
 
 ```sh
 npm run readme:update
@@ -195,7 +197,7 @@ npm run readme:update
 
 ## report:create
 
-Creates a report on current issues.
+生成当前 issue 状况的报告。
 
 ```sh
 npm run report:create
@@ -203,7 +205,7 @@ npm run report:create
 
 ## lint
 
-Checks the utility scripts themselves for syntax errors.
+检查工具脚本本身的语法错误。
 
 ```sh
 npm run lint
@@ -211,7 +213,7 @@ npm run lint
 
 ## test
 
-Runs a test of all the scripts described above.
+运行上述所有脚本的测试。
 
 ```sh
 npm test

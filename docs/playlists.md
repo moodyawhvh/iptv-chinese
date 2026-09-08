@@ -1,14 +1,16 @@
-# Playlists
+> 🌐 本文档由 [iptv-org/iptv](https://github.com/iptv-org/iptv) 翻译,英文原版见原项目。
 
-The repository uses two types of playlists: internal and public.
+# 播放列表
 
-## Internal
+本仓库使用两类播放列表:内部播放列表和公开播放列表。
 
-These playlists are located in the [streams/](../streams) folder and contain all links currently available in the repository.
+## 内部播放列表
 
-The links in these playlists are grouped by country and by the service from which the stream is broadcast. They are arranged this way solely for the convenience of moderating links.
+这类播放列表位于 [streams/](../streams) 文件夹,包含仓库当前所有可用的链接。
 
-In its simplest form, an internal playlist looks like this:
+这些播放列表中的链接按国家以及直播流来源服务分组。这样排列只是为了方便链接的审核管理。
+
+最简单的形式下,一个内部播放列表长这样:
 
 ```
 #EXTM3U
@@ -16,31 +18,31 @@ In its simplest form, an internal playlist looks like this:
 https://example.com/playlist.m3u8
 ```
 
-If there is a guide for one of the channels in the playlist in our [EPG](https://github.com/iptv-org/epg/blob/master/GUIDES.md) repository, the header will also include a link to it:
+如果播放列表中的某个频道在我们的 [EPG](https://github.com/iptv-org/epg/blob/master/GUIDES.md) 仓库里有对应的节目指南,文件头还会包含指向它的链接:
 
 ```
 #EXTM3U x-tvg-url="https://example.com/guide.xml"
 ```
 
-Since these playlists are processed primarily using scripts, we need to follow a few rules when editing them:
+由于这些播放列表主要由脚本处理,编辑时必须遵守以下几条规则:
 
-- All files must have the `.m3u` extension
-- The playlist must begin with the header `#EXTM3U`
-- Each link must comply with the [Stream Description Scheme](./stream-description-scheme.md)
-- Lines must end with [CRLF](https://developer.mozilla.org/en-US/docs/Glossary/CRLF)
-- The file encoding must be UTF-8 without BOM
+- 所有文件必须使用 `.m3u` 扩展名
+- 播放列表必须以 `#EXTM3U` 头开始
+- 每条链接必须符合[直播流描述方案](./stream-description-scheme.md)
+- 行尾必须使用 [CRLF](https://developer.mozilla.org/en-US/docs/Glossary/CRLF)
+- 文件编码必须是不带 BOM 的 UTF-8
 
-## Public
+## 公开播放列表
 
-Unlike internal playlists, these playlists are created specifically for regular users.
+与内部播放列表不同,这类播放列表是专门为普通用户生成的。
 
-They are generated automatically using the [playlist:generate](./scripts.md#playlistgenerate) script every day at 00:00 UTC and then placed in a separate branch of [gh-pages](https://github.com/iptv-org/iptv/tree/gh-pages).
+它们由 [playlist:generate](./scripts.md#playlistgenerate) 脚本每天在 UTC 00:00 自动生成,然后放入 [gh-pages](https://github.com/iptv-org/iptv/tree/gh-pages) 分支。
 
-The links in these playlists are organized solely based on the channel's description in our [database](https://github.com/iptv-org/database). For example, if a channel's broadcast area is listed as `c/IT`, the link to its stream will automatically be placed in the `countries/it.m3u` file.
+这些播放列表中的链接完全按照频道在我们[数据库](https://github.com/iptv-org/database)中的描述来组织。例如,某频道的播出区域标注为 `c/IT`,那么它的直播流链接就会被自动放入 `countries/it.m3u` 文件。
 
-Another difference from internal playlists is that public playlists include only the best available option for each channel, based on stream quality and labels. The exception is playlists in the `raw/` folder.
+与内部播放列表的另一个区别是:公开播放列表中每个频道只保留基于画质和标签选出的最佳可用选项,`raw/` 文件夹中的播放列表除外。
 
-Additionally, if the link includes a valid [stream ID](./stream-id.md), the channel logo, category, broadcast country and language will be added to the description. For example:
+此外,如果链接带有有效的[流 ID](./stream-id.md),描述中还会附上频道 Logo、分类、播出国家和语言。例如:
 
 ```
 #EXTM3U x-tvg-url="https://example.com/guide.xml”
@@ -48,4 +50,4 @@ Additionally, if the link includes a valid [stream ID](./stream-id.md), the chan
 https://example.com/playlist.m3u8
 ```
 
-A complete list of public playlists can always be found in [PLAYLISTS.md](../PLAYLISTS.md).
+公开播放列表的完整清单随时可以在 [PLAYLISTS.md](../PLAYLISTS.md) 中查看。
